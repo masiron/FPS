@@ -21,10 +21,7 @@ public class GunController : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (cycleTime <= 0.5f) 
-		{
 			cycleTime += Time.deltaTime;
-		}
 	}
 		
 	public void Shot (RaycastHit hit)
@@ -35,7 +32,7 @@ public class GunController : MonoBehaviour
 		}
 	}
 
-	public void Fire (Vector3 hitposition)
+	private void Fire (Vector3 hitposition)
 	{
 		GameObject muzzleFire = Instantiate (muzzleFireParticle, muzzle.transform.position, Quaternion.identity);
 		GameObject fire = Instantiate (fireParticle, hitposition, Quaternion.identity);

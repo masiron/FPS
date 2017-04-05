@@ -22,7 +22,7 @@ public class FPController : MonoBehaviour
 		{
 			if (Input.GetMouseButton (0)) 
 			{
-				gun.Shot (hit.point);
+				gun.Shot (hit);
 			}
 		}
 	}

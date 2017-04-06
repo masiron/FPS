@@ -58,7 +58,7 @@ public class GunController : MonoBehaviour
 		Debug.Log ("Shot    " + "装弾数：" + magazine + " ストレージ：" + bulletStorage + " 装填可能数：" + bulletSpace);
 	}
 
-	public void bulletReload ()
+	private void bulletReload ()
 	{
 		if (bulletStorage >= bulletSpace) 
 		{

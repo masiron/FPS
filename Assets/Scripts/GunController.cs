@@ -14,6 +14,7 @@ public class GunController : MonoBehaviour
 					 private int bulletSpace = 0;
 	[SerializeField] private int maxBullet;
 	[SerializeField] private int bulletStorage;
+	[SerializeField] GameManager gameManager;
 
 	private AudioSource audioSource;
 
@@ -31,7 +32,16 @@ public class GunController : MonoBehaviour
 		
 	public void Shot (RaycastHit hit)
 	{
-		if (cycleTime > 0.5f && magazine > 0) Fire (hit.point);	
+		if (cycleTime > 0.5f && magazine > 0) 
+		{
+			Fire (hit.point);
+			TargetController target = hit.transform.GetComponent<TargetController> ();
+			if (target != null) 
+			{
+				target.Damaged ();
+				gameManager.Score (hit.point);
+			}
+		}
 	}
 
 	public void Reload ()
@@ -41,7 +51,6 @@ public class GunController : MonoBehaviour
 			audioSource.PlayOneShot (reloadSound);
 			bulletReload ();
 		}
-
 	}
 
 	private void Fire (Vector3 hitposition)
@@ -50,12 +59,11 @@ public class GunController : MonoBehaviour
 		GameObject fire = Instantiate (fireParticle, hitposition, Quaternion.identity);
 		audioSource.PlayOneShot (shotSound);
 
-		Destroy (muzzleFire, 0.2f);
-		Destroy (fire, 0.5f);
+		Destroy (muzzleFire, 0.1f);
+		Destroy (fire, 0.1f);
 		cycleTime = 0;
 		magazine--;
 		bulletSpace++;
-		Debug.Log ("Shot    " + "装弾数：" + magazine + " ストレージ：" + bulletStorage + " 装填可能数：" + bulletSpace);
 	}
 
 	private void bulletReload ()
@@ -65,14 +73,12 @@ public class GunController : MonoBehaviour
 			magazine += bulletSpace;
 			bulletStorage -= bulletSpace;
 			bulletSpace = 0;
-			Debug.Log ("Reload  " + "装弾数：" + magazine + " ストレージ：" + bulletStorage + " 装填可能数：" + bulletSpace);
 		}
 		else
 		{
 			magazine += bulletStorage;
 			bulletStorage = 0;
 			bulletSpace = 0;
-			Debug.Log ("Reload  " + "装弾数：" + magazine + " ストレージ：" + bulletStorage + " 装填可能数：" + bulletSpace);
 		}
 	}
 }

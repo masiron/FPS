@@ -20,10 +20,8 @@ public class FPController : MonoBehaviour
 
 		if (Physics.Raycast (ray, out hit)) 
 		{
-			if (Input.GetMouseButton (0)) 
-			{
-				gun.Shot (hit);
-			}
+			if (Input.GetMouseButton (0)) gun.Shot (hit);
 		}
+		if (Input.GetKey (KeyCode.R)) gun.Reload ();
 	}
 }

@@ -15,7 +15,7 @@ public class UIController : MonoBehaviour
 
 	void Update () 
 	{
-		timer.text = "Time :" + (int)Time.time;
+		timer.text = "Time :" + (90 - (int)Time.time) + "sec";
 		Score.text = "Score :" + game.putScore ();
 		bullet.text = "Bullet :" + gun.putBullet ();
 		storage.text = "Storage : " + gun.putStorage ();

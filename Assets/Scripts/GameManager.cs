@@ -10,16 +10,19 @@ public class GameManager : MonoBehaviour
 	private float distance;
 
 
-	private int CalcScore(float dis)
+	private void CalcScore(float dis)
 	{
 		totalScore += (100 - (int)dis * 30);
-		return totalScore;
 	}
 
 	public void Score (Vector3 hitposition)
 	{
 		distance = Vector2.Distance ((Vector2)hitposition, (Vector2)MarkerObj.transform.position);
-		CalcScore (distance);
-		Debug.Log ("SCORE:" + totalScore);
+		totalScore += (100 - (int)distance * 30);
+	}
+
+	public int putScore ()
+	{
+		return this.totalScore;
 	}
 }

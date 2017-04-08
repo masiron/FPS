@@ -6,6 +6,9 @@ public class FPController : MonoBehaviour
 {
 
 	[SerializeField] GunController gun;
+	[SerializeField] private GameObject snipeImage;
+	[SerializeField] private Camera camera;
+	private bool isSnipe = false;
 
 	// Use this for initialization
 	void Start () 
@@ -23,5 +26,22 @@ public class FPController : MonoBehaviour
 			if (Input.GetMouseButton (0)) gun.Shot (hit);
 		}
 		if (Input.GetKey (KeyCode.R)) gun.Reload ();
+		if (Input.GetMouseButton (1)) SwitchSniperMode ();
+	}
+
+	private void SwitchSniperMode ()
+	{
+		if (isSnipe == false)
+		{
+			isSnipe = true;
+			snipeImage.SetActive (true);
+			camera.fieldOfView = 20.0f;
+		}
+		else
+		{
+			isSnipe = false;
+			snipeImage.SetActive (false);
+			camera.fieldOfView = 60.0f;
+		}
 	}
 }

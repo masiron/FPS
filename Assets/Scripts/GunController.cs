@@ -59,8 +59,8 @@ public class GunController : MonoBehaviour
 		GameObject fire = Instantiate (fireParticle, hitposition, Quaternion.identity);
 		audioSource.PlayOneShot (shotSound);
 
-		Destroy (muzzleFire, 0.1f);
-		Destroy (fire, 0.1f);
+		Destroy (muzzleFire, 0.3f);
+		Destroy (fire, 0.3f);
 		cycleTime = 0;
 		magazine--;
 		bulletSpace++;
@@ -80,5 +80,15 @@ public class GunController : MonoBehaviour
 			bulletStorage = 0;
 			bulletSpace = 0;
 		}
+	}
+
+	public int putBullet ()
+	{
+		return magazine;
+	}
+	 
+	public int putStorage ()
+	{
+		return bulletStorage;
 	}
 }
